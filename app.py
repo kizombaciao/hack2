@@ -48,7 +48,7 @@ st.write(ethnic)
 condition = st.sidebar.multiselect("Prior Medical Condition", ("Hypertension", "Obesity", "Chronic Lung Disease", "Diabetes", "Cardiovascular Disease"))
 st.write("You Selected: ", len(condition), "condition")
 
-if len(condition) > 2:
+if len(condition) > 0:
   my_travelalone = 1 
 else:
   my_travelalone = 0
@@ -358,10 +358,10 @@ if st.sidebar.button("Update"):
     df2
     y_pred_proba = log_clf.predict_proba(df2[Selected_features])
     #st.write(dir(log_clf))
-    st.write('RISK SCORE IS:  ')
-    st.write(y_pred_proba[:, 1])
     df2['Survived'] = log_clf.predict(df2[Selected_features])
     df2
+    st.write('RISK SCORE IS:  ')
+    st.write(y_pred_proba[:, 1])
     
     
     # note, privacy text
