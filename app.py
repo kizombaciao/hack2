@@ -361,7 +361,7 @@ if st.sidebar.button("Update"):
     df2['Survived'] = log_clf.predict(df2[Selected_features])
     df2
     st.write('RISK SCORE IS:  ')
-    st.write(y_pred_proba[:, 1])
+    st.write(y_pred_proba[:, 0])
     
     
     # note, privacy text
