@@ -17,7 +17,7 @@ import streamlit as st
 
 ############################## !
 
-st.title('Risovid')
+st.title('Riskovid')
 st.header('Back To The Living Room')
 st.subheader('subHeader !!!')
 
@@ -363,5 +363,8 @@ if st.sidebar.button("Update"):
     st.write('RISK SCORE IS:  ')
     st.write(y_pred_proba[:, 0])
     
+    st.write('From 0 to 0,3: « You’re safe to go but don’t forget the barrier gestures »')
+    st.write('From 0,4 to 0,7: « You’re okay so be careful if you have to go outside »')
+    st.write('From 0,8 to 1: « You’re highly at risks you’re better stay at home »')
     
     # note, privacy text
