@@ -197,11 +197,11 @@ if flag == 0:
                              return_train_score=False)
     
     #st.write('K-fold cross-validation results:')
-    for sc in range(len(scoring)):
+    #for sc in range(len(scoring)):
         #st.write(modelCV.__class__.__name__+" average %s: %.3f (+/-%.3f)" % (list(scoring.keys())[sc], -results ['test_%s' % list(scoring.values())[sc]].mean()
-                                   if list(scoring.values())[sc]=='neg_log_loss' 
-                                   else results['test_%s' % list(scoring.values())[sc]].mean(), 
-                                   results['test_%s' % list(scoring.values())[sc]].std()))
+                                   #if list(scoring.values())[sc]=='neg_log_loss' 
+                                   #else results['test_%s' % list(scoring.values())[sc]].mean(), 
+                                   #results['test_%s' % list(scoring.values())[sc]].std()))
     
     from sklearn.model_selection import GridSearchCV
     
