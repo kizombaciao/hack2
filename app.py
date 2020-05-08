@@ -104,7 +104,7 @@ st.write(input_data)
 if st.sidebar.button("Update"):
 
     train_df = pd.read_csv("train.csv", sep=',')
-    test_df = pd.read_csv("test.csv", sep=',')
+    #test_df = pd.read_csv("test.csv", sep=',')
 
     train_data = train_df.copy()
     train_data["Age"].fillna(train_df["Age"].median(skipna=True), inplace=True)
@@ -135,28 +135,28 @@ if st.sidebar.button("Update"):
     #st.write('Now, apply the same changes to the test data.')
     #st.write(test_df.isnull().sum())
     
-    test_data = test_df.copy()
-    test_data["Age"].fillna(train_df["Age"].median(skipna=True), inplace=True)
-    test_data["Fare"].fillna(train_df["Fare"].median(skipna=True), inplace=True)
-    test_data.drop('Cabin', axis=1, inplace=True)
+    #test_data = test_df.copy()
+    #test_data["Age"].fillna(train_df["Age"].median(skipna=True), inplace=True)
+    #test_data["Fare"].fillna(train_df["Fare"].median(skipna=True), inplace=True)
+    #test_data.drop('Cabin', axis=1, inplace=True)
     
-    test_data['TravelAlone']=np.where((test_data["SibSp"]+test_data["Parch"])>0, 0, 1)
+    #test_data['TravelAlone']=np.where((test_data["SibSp"]+test_data["Parch"])>0, 0, 1)
     
-    test_data.drop('SibSp', axis=1, inplace=True)
-    test_data.drop('Parch', axis=1, inplace=True)
+    #test_data.drop('SibSp', axis=1, inplace=True)
+    #test_data.drop('Parch', axis=1, inplace=True)
     
-    testing = pd.get_dummies(test_data, columns=["Pclass","Embarked","Sex"])
-    testing.drop('Sex_female', axis=1, inplace=True)
-    testing.drop('PassengerId', axis=1, inplace=True)
-    testing.drop('Name', axis=1, inplace=True)
-    testing.drop('Ticket', axis=1, inplace=True)
+    #testing = pd.get_dummies(test_data, columns=["Pclass","Embarked","Sex"])
+    #testing.drop('Sex_female', axis=1, inplace=True)
+    #testing.drop('PassengerId', axis=1, inplace=True)
+    #testing.drop('Name', axis=1, inplace=True)
+    #testing.drop('Ticket', axis=1, inplace=True)
     
-    final_test = testing
+    #final_test = testing
     #final_test
     
     #st.header('EDA')
     final_train['IsMinor']=np.where(final_train['Age']<=16, 1, 0)
-    final_test['IsMinor']=np.where(final_test['Age']<=16, 1, 0)
+    #final_test['IsMinor']=np.where(final_test['Age']<=16, 1, 0)
     #final_test
     
     cols = ["Age","TravelAlone","Pclass_1","Pclass_2","Embarked_C","Embarked_S","Sex_male","IsMinor"] 
@@ -168,10 +168,10 @@ if st.sidebar.button("Update"):
 
     X_train = X.to_numpy()
     y_train = y.to_numpy()
-    X_test = final_test[cols].to_numpy()
+    #X_test = final_test[cols].to_numpy()
 
     X_train = torch.from_numpy(X_train.astype(np.float32))
-    X_test = torch.from_numpy(X_test.astype(np.float32))
+    #X_test = torch.from_numpy(X_test.astype(np.float32))
     y_train = torch.from_numpy(y_train.astype(np.float32))
     #y_test = torch.from_numpy(y_test.astype(np.float32))
 
