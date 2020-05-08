@@ -14,16 +14,7 @@ warnings.simplefilter(action='ignore')
 import time
 import streamlit as st
 ############################## !
-import torch
-import torch.nn as nn
-from sklearn import datasets
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 
-from torch.autograd import Variable
-import torch.nn.functional as F
-import sklearn.linear_model as lm
-from sklearn.model_selection import GridSearchCV
 ############################## !
 
 st.title('Riskovid')
@@ -163,9 +154,6 @@ if st.sidebar.button("Update"):
     X = final_train[cols]
     y = final_train['Survived']    
 
-    n_samples, n_features = X.shape
-    #(n_samples, n_features)
-
     X_train = X.to_numpy()
     y_train = y.to_numpy()
     X_test = final_test[cols].to_numpy()
@@ -217,9 +205,7 @@ if st.sidebar.button("Update"):
     my_predict = model(my_test)
 
     st.write('RISK SCORE IS:  ')
-    #my_predict[0]
-    1 - my_predict.tolist()[0][0]
-
+    my_predict
     st.write('From 0 to 0,3: « You’re safe to go but don’t forget the barrier gestures »')
     st.write('From 0,4 to 0,7: « You’re okay so be careful if you have to go outside »')
     st.write('From 0,8 to 1: « You’re highly at risks you’re better stay at home »')
