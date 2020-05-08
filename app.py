@@ -37,31 +37,31 @@ zipcode = st.sidebar.selectbox(
     'Location',
     ('Manhattan', 'Queens', 'Bronx')
 )
-st.write(zipcode)
+#st.write(zipcode)
 
 gender = st.sidebar.selectbox(
     'Gender',
     ('Female', 'Male')
 )
-st.write(gender)
+#st.write(gender)
 
 age = st.sidebar.slider("Age", 0, 80)
-st.write(age)
+#st.write(age)
 
 ethnic = st.sidebar.selectbox(
     'Ethnicity',
     ('Black', 'Hispanic', 'White')
 )
-st.write(ethnic)
+#st.write(ethnic)
 
 condition = st.sidebar.multiselect("Prior Medical Condition", ("Hypertension", "Obesity", "Chronic Lung Disease", "Diabetes", "Cardiovascular Disease"))
-st.write("You Selected: ", len(condition), "condition")
+#st.write("You Selected: ", len(condition), "condition")
 
 if len(condition) > 0:
   my_travelalone = 1 
 else:
   my_travelalone = 0
-my_travelalone
+#my_travelalone
 
 if ethnic == 'Black':
     my_pclass_1 = 0
@@ -72,7 +72,7 @@ elif ethnic == 'Hispanic':
 else:
     my_pclass_1 = 1
     my_pclass_2 = 0    
-st.write(my_pclass_1, my_pclass_2)
+#st.write(my_pclass_1, my_pclass_2)
 
 if zipcode == 'Manhattan':
     my_embarked_c = 1
@@ -83,7 +83,7 @@ elif zipcode == 'Queens':
 else:
     my_embarked_c = 0
     my_embarked_s = 1
-st.write(my_embarked_c, my_embarked_s)
+#st.write(my_embarked_c, my_embarked_s)
 
 if gender == 'Male':
     sex_male = 1
@@ -154,7 +154,7 @@ if st.sidebar.button("Update"):
     final_test = testing
     #final_test
     
-    st.header('EDA')
+    #st.header('EDA')
     final_train['IsMinor']=np.where(final_train['Age']<=16, 1, 0)
     final_test['IsMinor']=np.where(final_test['Age']<=16, 1, 0)
     #final_test
