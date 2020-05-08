@@ -91,9 +91,9 @@ st.write(input_data)
 
 
 ############################## !
-flag = 0
-if flag == 0:
-    flag = 1
+
+if st.sidebar.button("Update"):
+
     train_df = pd.read_csv("train.csv", sep=',')
     test_df = pd.read_csv("test.csv", sep=',')
     #train_df
@@ -178,6 +178,11 @@ if flag == 0:
     final_test['IsMinor']=np.where(final_test['Age']<=16, 1, 0)
     #final_test
     
+    # age versus race versus survival
+    
+
+
+
     st.header('Logistic Regression')
     from sklearn.linear_model import LogisticRegression
     from sklearn.feature_selection import RFE
@@ -350,10 +355,6 @@ if flag == 0:
     st.write(submission.tail())
     final_test[Selected_features]
     
-
-
-if st.sidebar.button("Update"):
-
     ############################## !
     #Selected_features = ['Age', 'TravelAlone', 'Pclass_1', 'Pclass_2', 'Embarked_C', 
     #                     'Embarked_S', 'Sex_male', 'IsMinor']
