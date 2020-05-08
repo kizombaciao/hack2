@@ -14,83 +14,6 @@ warnings.simplefilter(action='ignore')
 import time
 import streamlit as st
 ############################## !
-
-############################## !
-
-st.title('Riskovid')
-st.header('Back To The Living Room')
-st.subheader('subHeader !!!')
-
-st.sidebar.header("Sidebar Header")
-st.sidebar.text("Sidebar Text")
-
-zipcode = st.sidebar.selectbox(
-    'Location',
-    ('Manhattan', 'Queens', 'Bronx')
-)
-st.write(zipcode)
-
-gender = st.sidebar.selectbox(
-    'Gender',
-    ('Female', 'Male')
-)
-st.write(gender)
-
-age = st.sidebar.slider("Age", 0, 80)
-st.write(age)
-
-ethnic = st.sidebar.selectbox(
-    'Ethnicity',
-    ('Black', 'Hispanic', 'White')
-)
-st.write(ethnic)
-
-condition = st.sidebar.multiselect("Prior Medical Condition", ("Hypertension", "Obesity", "Chronic Lung Disease", "Diabetes", "Cardiovascular Disease"))
-st.write("You Selected: ", len(condition), "condition")
-
-if len(condition) > 0:
-  my_travelalone = 1 
-else:
-  my_travelalone = 0
-my_travelalone
-
-if ethnic == 'Black':
-    my_pclass_1 = 0
-    my_pclass_2 = 0
-elif ethnic == 'Hispanic':
-    my_pclass_1 = 0
-    my_pclass_2 = 1
-else:
-    my_pclass_1 = 1
-    my_pclass_2 = 0    
-st.write(my_pclass_1, my_pclass_2)
-
-if zipcode == 'Manhattan':
-    my_embarked_c = 1
-    my_embarked_s = 0
-elif zipcode == 'Queens':
-    my_embarked_c = 0
-    my_embarked_s = 0
-else:
-    my_embarked_c = 0
-    my_embarked_s = 1
-st.write(my_embarked_c, my_embarked_s)
-
-if gender == 'Male':
-    sex_male = 1
-else:
-    sex_male = 0
-
-if age <= 16:
-    my_isminor = 1
-else:
-    my_isminor = 0
-
-input_data = np.array([[age, my_travelalone, my_pclass_1, my_pclass_2, my_embarked_c, my_embarked_s, sex_male, my_isminor]])
-st.write(input_data)
-
-
-############################## !
 flag = 0
 if flag == 0:
     flag = 1
@@ -191,15 +114,15 @@ if flag == 0:
     rfe = RFE(model, 8)
     rfe = rfe.fit(X, y)
     # summarize the selection of the attributes
-    st.write('Selected features: %s' % list(X.columns[rfe.support_]))
+    #st.write('Selected features: %s' % list(X.columns[rfe.support_]))
     
     from sklearn.feature_selection import RFECV
     # Create the RFE object and compute a cross-validated score.
     # The "accuracy" scoring is proportional to the number of correct classifications
     rfecv = RFECV(estimator=LogisticRegression(), step=1, cv=10, scoring='accuracy')
     rfecv.fit(X, y)
-    st.write("Optimal number of features: %d" % rfecv.n_features_)
-    st.write('Selected features: %s' % list(X.columns[rfecv.support_]))
+    #st.write("Optimal number of features: %d" % rfecv.n_features_)
+    #st.write('Selected features: %s' % list(X.columns[rfecv.support_]))
     
     Selected_features = ['Age', 'TravelAlone', 'Pclass_1', 'Pclass_2', 'Embarked_C', 
                          'Embarked_S', 'Sex_male', 'IsMinor']
@@ -224,13 +147,13 @@ if flag == 0:
     y_pred = logreg.predict(X_test)
     y_pred_proba = logreg.predict_proba(X_test)[:, 1]
     [fpr, tpr, thr] = roc_curve(y_test, y_pred_proba)
-    st.write('Train/Test split results:')
-    st.write(logreg.__class__.__name__+" accuracy is %2.3f" % accuracy_score(y_test, y_pred))
-    st.write(logreg.__class__.__name__+" log_loss is %2.3f" % log_loss(y_test, y_pred_proba))
-    st.write(logreg.__class__.__name__+" auc is %2.3f" % auc(fpr, tpr))
+    #st.write('Train/Test split results:')
+    #st.write(logreg.__class__.__name__+" accuracy is %2.3f" % accuracy_score(y_test, y_pred))
+    #st.write(logreg.__class__.__name__+" log_loss is %2.3f" % log_loss(y_test, y_pred_proba))
+    #st.write(logreg.__class__.__name__+" auc is %2.3f" % auc(fpr, tpr))
     
     idx = np.min(np.where(tpr > 0.95)) # index of the first threshold for which the sensibility > 0.95
-    idx
+    #idx
     
     # 10-fold cross-validation logistic regression
     logreg = LogisticRegression()
@@ -241,10 +164,10 @@ if flag == 0:
     scores_accuracy = cross_val_score(logreg, X, y, cv=10, scoring='accuracy')
     scores_log_loss = cross_val_score(logreg, X, y, cv=10, scoring='neg_log_loss')
     scores_auc = cross_val_score(logreg, X, y, cv=10, scoring='roc_auc')
-    st.write('K-fold cross-validation results:')
-    st.write(logreg.__class__.__name__+" average accuracy is %2.3f" % scores_accuracy.mean())
-    st.write(logreg.__class__.__name__+" average log_loss is %2.3f" % -scores_log_loss.mean())
-    st.write(logreg.__class__.__name__+" average auc is %2.3f" % scores_auc.mean())
+    #st.write('K-fold cross-validation results:')
+    #st.write(logreg.__class__.__name__+" average accuracy is %2.3f" % scores_accuracy.mean())
+    #st.write(logreg.__class__.__name__+" average log_loss is %2.3f" % -scores_log_loss.mean())
+    #st.write(logreg.__class__.__name__+" average auc is %2.3f" % scores_auc.mean())
     
     from sklearn.model_selection import cross_validate
     
@@ -273,9 +196,9 @@ if flag == 0:
     results = cross_validate(modelCV, final_train[cols], y, cv=10, scoring=list(scoring.values()), 
                              return_train_score=False)
     
-    st.write('K-fold cross-validation results:')
+    #st.write('K-fold cross-validation results:')
     for sc in range(len(scoring)):
-        st.write(modelCV.__class__.__name__+" average %s: %.3f (+/-%.3f)" % (list(scoring.keys())[sc], -results ['test_%s' % list(scoring.values())[sc]].mean()
+        #st.write(modelCV.__class__.__name__+" average %s: %.3f (+/-%.3f)" % (list(scoring.keys())[sc], -results ['test_%s' % list(scoring.values())[sc]].mean()
                                    if list(scoring.values())[sc]=='neg_log_loss' 
                                    else results['test_%s' % list(scoring.values())[sc]].mean(), 
                                    results['test_%s' % list(scoring.values())[sc]].std()))
@@ -293,11 +216,11 @@ if flag == 0:
     gs.fit(X, y)
     results = gs.cv_results_
     
-    st.write('='*20)
-    st.write("best params: " + str(gs.best_estimator_))
-    st.write("best params: " + str(gs.best_params_))
-    st.write('best score:', gs.best_score_)
-    st.write('='*20)
+    #st.write('='*20)
+    #st.write("best params: " + str(gs.best_estimator_))
+    #st.write("best params: " + str(gs.best_params_))
+    #st.write('best score:', gs.best_score_)
+    #st.write('='*20)
     
     from sklearn.preprocessing import StandardScaler
     from sklearn.model_selection import RepeatedStratifiedKFold
@@ -334,11 +257,11 @@ if flag == 0:
     log_clf.fit(X, y)
     results = log_clf.cv_results_
     
-    st.write('='*20)
-    st.write("best params: " + str(log_clf.best_estimator_))
-    st.write("best params: " + str(log_clf.best_params_))
-    st.write('best score:', log_clf.best_score_)
-    st.write('='*20)
+    #st.write('='*20)
+    #st.write("best params: " + str(log_clf.best_estimator_))
+    #st.write("best params: " + str(log_clf.best_params_))
+    #st.write('best score:', log_clf.best_score_)
+    #st.write('='*20)
     
     final_test['Survived'] = log_clf.predict(final_test[Selected_features])
     final_test['PassengerId'] = test_df['PassengerId']
@@ -347,14 +270,90 @@ if flag == 0:
     
     submission.to_csv("submission.csv", index=False)
     
-    st.write(submission.tail())
+    #st.write(submission.tail())
     final_test[Selected_features]
-    
 
+############################## !
+
+st.title('Riskovid')
+st.header('Back To The Living Room')
+st.subheader('subHeader !!!')
+
+st.sidebar.header("Sidebar Header")
+st.sidebar.text("Sidebar Text")
+
+zipcode = st.sidebar.selectbox(
+    'Location',
+    ('Manhattan', 'Queens', 'Bronx')
+)
+st.write(zipcode)
+
+gender = st.sidebar.selectbox(
+    'Gender',
+    ('Female', 'Male')
+)
+st.write(gender)
+
+age = st.sidebar.slider("Age", 0, 80)
+st.write(age)
+
+ethnic = st.sidebar.selectbox(
+    'Ethnicity',
+    ('Black', 'Hispanic', 'White')
+)
+st.write(ethnic)
+
+condition = st.sidebar.multiselect("Prior Medical Condition", ("Hypertension", "Obesity", "Chronic Lung Disease", "Diabetes", "Cardiovascular Disease"))
+st.write("You Selected: ", len(condition), "condition")
+
+if len(condition) > 0:
+  my_travelalone = 1 
+else:
+  my_travelalone = 0
+my_travelalone
+
+if ethnic == 'Black':
+    my_pclass_1 = 0
+    my_pclass_2 = 0
+elif ethnic == 'Hispanic':
+    my_pclass_1 = 0
+    my_pclass_2 = 1
+else:
+    my_pclass_1 = 1
+    my_pclass_2 = 0    
+st.write(my_pclass_1, my_pclass_2)
+
+if zipcode == 'Manhattan':
+    my_embarked_c = 1
+    my_embarked_s = 0
+elif zipcode == 'Queens':
+    my_embarked_c = 0
+    my_embarked_s = 0
+else:
+    my_embarked_c = 0
+    my_embarked_s = 1
+st.write(my_embarked_c, my_embarked_s)
+
+if gender == 'Male':
+    sex_male = 1
+else:
+    sex_male = 0
+
+if age <= 16:
+    my_isminor = 1
+else:
+    my_isminor = 0
+
+input_data = np.array([[age, my_travelalone, my_pclass_1, my_pclass_2, my_embarked_c, my_embarked_s, sex_male, my_isminor]])
+st.write(input_data)
+
+
+############################## !
+    
+############################## !
 
 if st.sidebar.button("Update"):
 
-    ############################## !
     #Selected_features = ['Age', 'TravelAlone', 'Pclass_1', 'Pclass_2', 'Embarked_C', 
     #                     'Embarked_S', 'Sex_male', 'IsMinor']
     
